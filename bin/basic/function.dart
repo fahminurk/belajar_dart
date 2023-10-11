@@ -55,8 +55,31 @@ void main() {
   int sum2(int a, int b) => a + b;
   print(sum2(2, 3));
 
-  //-------------------inner function
-  String fullname(name) => 'hai $name';
-  String name() => 'fahmi';
-  print(fullname(name()));
+  //----------- function as parameter
+  void sayHi(String name, String Function(String) filter) {
+    var filteredGender = filter(name);
+    print('Hi $filteredGender');
+  }
+
+  String filterName(String name) {
+    if (name == 'fahmi') {
+      return 'sayang';
+    } else {
+      return ', kamu siapa?';
+    }
+  }
+
+  sayHi('fahmi', filterName);
+  sayHi('sasa', (name) => name == 'fahmi' ? 'sayang' : ', kamu siapa?');
+
+  //--------------- anonymous function as variable
+
+  var nameUpper = (String name) {
+    return name.toUpperCase();
+  };
+
+  var nameLower = (String name) => name.toLowerCase();
+
+  print(nameUpper('fahmi'));
+  print(nameLower('NUR'));
 }
